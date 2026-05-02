@@ -14,5 +14,3 @@ El sistema sigue el flujo diseñado en el diagrama de Mermaid proporcionado:
 * **AWS**: Proveedor de nube.
 * **Python**: Lógica de las funciones Lambda.
 * **GitHub**: Control de versiones y bitácora de hitos.
-
-## 🚀 Cómo Validar el Proyecto
