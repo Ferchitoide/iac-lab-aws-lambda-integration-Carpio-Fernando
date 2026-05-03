@@ -1,9 +1,9 @@
 # 1. Lambda de Ingesta (S3 -> SQS)
 resource "aws_lambda_function" "ingest_lambda" {
-  filename      = "lambda_ingest.zip" # El profesor querrá ver el empaquetado
+  filename      = "ingest.zip" # Cambiado para que coincida con el zip que crearemos
   function_name = "${var.project_name}-ingest"
   role          = aws_iam_role.lambda_role.arn
-  handler       = "index.handler"
+  handler       = "ingest.handler" # <--- CAMBIADO: era index.handler
   runtime       = "python3.9"
 
   environment {
@@ -15,12 +15,12 @@ resource "aws_lambda_function" "ingest_lambda" {
 
 # 2. Lambda de Procesamiento (SQS -> S3)
 resource "aws_lambda_function" "process_lambda" {
-  filename      = "lambda_process.zip"
+  filename      = "process.zip" # Cambiado
   function_name = "${var.project_name}-processor"
   role          = aws_iam_role.lambda_role.arn
-  handler       = "index.handler"
+  handler       = "process.handler" # <--- CAMBIADO: era index.handler
   runtime       = "python3.9"
-  timeout       = 60 # Un minuto para procesar imágenes pesadas
+  timeout       = 60 
 
   environment {
     variables = {

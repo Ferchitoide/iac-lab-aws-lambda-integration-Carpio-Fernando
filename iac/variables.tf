@@ -17,3 +17,9 @@ variable "bucket_suffix" {
   type    = string
   default = "ferchito-2026"
 }
+
+variable "lambda_runtime" {
+  type        = string
+  description = "Runtime para las funciones Lambda"
+  default     = "python3.9"
+}
