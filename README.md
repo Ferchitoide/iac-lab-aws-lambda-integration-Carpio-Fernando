@@ -1,16 +1,24 @@
-# Laboratorio: Integración AWS + Lambda (IaC) 🚀
+# AWS Image Processor Infrastructure (IaC)
 
-Este proyecto implementa una arquitectura serverless para el procesamiento asíncrono de imágenes utilizando **Terraform** como herramienta de Infraestructura como Código (IaC).
+Este proyecto despliega una arquitectura de procesamiento de imágenes asíncrona utilizando Terraform.
 
-## 🏗️ Arquitectura del Sistema
-El sistema sigue el flujo diseñado en el diagrama de Mermaid proporcionado:
-1. **S3 Bucket**: Almacenamiento de imágenes con políticas de ciclo de vida (30/90 días).
-2. **SQS & DLQ**: Cola de mensajería para desacoplamiento y manejo de errores.
-3. **AWS Lambda**: Funciones para ingesta y procesamiento asíncrono.
-4. **VPC & Security**: Configuración de red privada y Endpoints para máxima seguridad.
+## Requisitos
+- Terraform >= 1.0.0
+- AWS CLI configurado con credenciales adecuadas.
 
-## 🛠️ Tecnologías Utilizadas
-* **Terraform**: Orquestación de infraestructura.
-* **AWS**: Proveedor de nube.
-* **Python**: Lógica de las funciones Lambda.
-* **GitHub**: Control de versiones y bitácora de hitos.
+## Estructura del Proyecto
+- `main.tf`: Definición de Lambdas, S3, SQS e IAM.
+- `vpc.tf`: Configuración de la red (VPC, Subnets, Gateway).
+- `variables.tf` y `terraform.tfvars`: Gestión de entornos (dev, qa, prod).
+
+## Instrucciones de Despliegue
+1. Inicializar el proyecto: 
+   `terraform init`
+2. Seleccionar o crear un entorno (workspace):
+   `terraform workspace select dev`
+3. Aplicar los cambios:
+   `terraform apply -auto-approve`
+
+## Destrucción de Recursos
+Para evitar costos, ejecutar:
+`terraform destroy -auto-approve`
