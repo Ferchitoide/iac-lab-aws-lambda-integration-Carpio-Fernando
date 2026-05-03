@@ -1,24 +1,30 @@
-# AWS Image Processor Infrastructure (IaC)
+Laboratorio Final: Infraestructura como Código (IaC) con AWS
+Estudiante: Luis Fernando Carpio Velásquez
 
-Este proyecto despliega una arquitectura de procesamiento de imágenes asíncrona utilizando Terraform.
+Carrera: Ingeniería de Sistemas e Inteligencia Artificial - UPAO
 
-## Requisitos
-- Terraform >= 1.0.0
-- AWS CLI configurado con credenciales adecuadas.
+Docente: Walter Leturia
 
-## Estructura del Proyecto
-- `main.tf`: Definición de Lambdas, S3, SQS e IAM.
-- `vpc.tf`: Configuración de la red (VPC, Subnets, Gateway).
-- `variables.tf` y `terraform.tfvars`: Gestión de entornos (dev, qa, prod).
+Descripción del Proyecto B|:
 
-## Instrucciones de Despliegue
-1. Inicializar el proyecto: 
-   `terraform init`
-2. Seleccionar o crear un entorno (workspace):
-   `terraform workspace select dev`
-3. Aplicar los cambios:
-   `terraform apply -auto-approve`
+Este proyecto despliega una arquitectura asíncrona en AWS utilizando Terraform. Implementa la ingesta de imágenes en Amazon S3, el procesamiento de eventos mediante SQS y la ejecución de lógica mediante funciones AWS Lambda, todo dentro de una red privada (VPC) con subredes públicas y privadas.  
 
-## Destrucción de Recursos
-Para evitar costos, ejecutar:
-`terraform destroy -auto-approve`
+Requisitos Previos *super importantes pa que funcione SI O SI*:
+
+Antes de iniciar el despliegue, asegúrese ingeniero de contar con:
+
+Terraform CLI instalado (versión v1.0.0+).
+
+AWS CLI configurado con credenciales de Administrador (aws configure).
+
+Los archivos de código de la Lambda (ingest.zip y lambda_function.zip) deben estar en la carpeta raíz del proyecto o en sus rutas correspondientes.  
+
+Instrucciones pal despliegue
+Siga estos pasos en orden para evitar errores de estado o de región:
+
+Inicializar el Directorio:
+Sitúese en la carpeta del proyecto donde se encuentran los archivos .tf y ejecute el poderoso "terraform init"
+Luego para probar los 3 entornos como los pidió (dev,qa,prod) es necesario ejecutar el terraform workspace new (el entorno) y luego su terraform select (de igual manera el entorno), darle terraform plan y por último su terraform apply.
+Luego de eso ya reflejará en la cuenta de AWS previamente configurada para que se puedan ver todos los cambios a la hora de ejecutar el terraform apply.
+
+De todas maneras de manera preventiva (para que no se generen costos ni nada ya que al ser distintos entorno no se borra todo con el poderosísimo terraform destroy) se ejecuta el terraform destroy pero en el workspace default, mas que nada es por medida de seguridad para garantizar un cuenta con cero recursos activos B|.
