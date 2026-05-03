@@ -3,11 +3,6 @@ variable "project_name" {
   default = "image-processor"
 }
 
-variable "environment" {
-  type        = string
-  description = "Entorno de despliegue (dev, qa, prod)"
-}
-
 variable "aws_region" {
   type    = string
   default = "us-east-2"
@@ -22,4 +17,18 @@ variable "lambda_runtime" {
   type        = string
   description = "Runtime para las funciones Lambda"
   default     = "python3.9"
+}
+
+# Variable auxiliar para el tag de entorno
+variable "environment" {
+  type        = string
+  description = "Entorno de despliegue (dev, qa, prod)"
+  default     = ""
+}
+
+# Lógica para detectar el entorno automáticamente
+locals {
+  # Si el workspace es 'default', lo tratamos como 'dev'. 
+  # De lo contrario, usamos el nombre del workspace (dev, qa, prod).
+  env = terraform.workspace == "default" ? "dev" : terraform.workspace
 }
