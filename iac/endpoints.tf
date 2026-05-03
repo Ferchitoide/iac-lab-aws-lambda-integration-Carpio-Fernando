@@ -10,7 +10,7 @@ resource "aws_vpc_endpoint" "s3" {
 # Asociación del Endpoint de S3 con las tablas de rutas
 resource "aws_vpc_endpoint_route_table_association" "private_s3_a" {
   route_table_id  = aws_vpc.main.main_route_table_id
-  vpc_endpoint_id = aws_vpc.s3.id
+  vpc_endpoint_id = aws_vpc_endpoint.s3.id
 }
 
 # Endpoint de Interface para SQS (para el puerto 443)
