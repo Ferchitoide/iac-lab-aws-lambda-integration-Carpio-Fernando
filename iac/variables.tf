@@ -16,7 +16,7 @@ variable "bucket_suffix" {
 variable "lambda_runtime" {
   type        = string
   description = "Runtime para las funciones Lambda"
-  default     = "python3.9"
+  default     = "nodejs18.x"
 }
 
 # Variable auxiliar para el tag de entorno
